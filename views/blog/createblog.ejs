@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <link rel="stylesheet" href="/css/universal.css">
+  <link rel="stylesheet" href="/css/blog/createblog.css">
+  <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+  <link rel="stylesheet" 
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="outer">
+        <h1>Ask Anonymously?</h1>
+        <div class="blog-div">
+            <form action="/post" method="post">
+                <div class="title">
+                    <p>What Is Your Discussion About?</p>
+                    <input name="textarea" class="titlearea" type="text" placeholder="Title" required autocomplete="off">
+                </div>
+                <div class="select-div">
+                    <p>Category</p>
+                    <select name="category" class="select" required>
+                        <option value="" disabled="disabled" selected="selected">Category</option>
+                        <option>Relationship</option>
+                        <option>Self-Care</option>
+                        <option>Covid-19</option>
+                        <option>Anxiety</option>
+                        <option>Depression</option>
+                        <option>Mindfulness</option>
+                        <option>Burnout</option>
+                        <option>Mental Wellness</option>
+                        <option>Guilt</option>
+                        <option>Anger</option>
+                        <option>Therapy</option>
+                        <option>Psychology</option>
+                        <option>Exercises</option>
+                        <option>OCD</option>
+                    </select>
+                </div>
+                <div class="body">
+                    <p>Describe Your Topic?</p>
+                    <textarea name="body" id="myTextarea" class="description-area" placeholder="Type Here" required></textarea>
+                </div>
+                <div class="last-div">
+                    <input name="check" type="checkbox" name="" id="">
+                    <label>Post Anonymously?</label>
+                </div>
+                
+                <button type="submit" class="discuss_btn">Start Discussion</button>
+            </form>
+                
+            
+        </div>
+    </div>
+    
+</body>
+<script type="text/javascript" src="/js/blog.js"></script>
+
+</html>

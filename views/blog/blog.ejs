@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <link rel="stylesheet" href="/css/blog/blog.css">
+  <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+  <link rel="stylesheet" 
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+  <div class="outer">
+    <div class="outer-askSection">
+      <div class="askSection">
+        <div class="ask-des">
+          <h2>Something In Your Mind?</h2>
+          <p>Ask and discuss with the community of users</p>
+          <p>from all across the globe</p>
+          <div class="askbtn"><a href="/blog/createblog">Ask Anonymously</a></div>
+        </div>
+        <div>
+          <img src="/images/chat.svg" alt="">
+        </div>
+      </div>
+    </div>
+    <div class="back"><h2>CHOOSE YOUR CATEGORIES:</h2></div>
+    <div class="category">
+      <div class="category-div">
+        <input type="checkbox"><label>Recommended</label>
+        <input type="checkbox"><label>Relationship</label>
+        <input type="checkbox"><label>Self Care</label>
+        <input type="checkbox"><label>Covid 19</label>
+        <input type="checkbox"><label>Anxiety</label>
+        <input type="checkbox"><label>Depression</label>
+        <input type="checkbox"><label>Mindfulness</label>
+        <input type="checkbox"><label>Burnout</label>
+        <input type="checkbox"><label>Mental Wellness</label>
+        <input type="checkbox"><label>Guilt</label>
+        <input type="checkbox"><label>Anger</label>
+        <input type="checkbox"><label>Therapy</label>
+        <input type="checkbox"><label>Psychology</label>
+        <input type="checkbox"><label>Exercises</label>
+        <input type="checkbox"><label>OCD</label>
+      </div>
+      
+    </div>
+    
+    <div class="all-blogs">
+      <%blogs.forEach(function(items){%>
+        <div class="card-container">
+          <div class="img-div">
+            <a href="/" class="hero-image-container">
+              <img class="hero-image" src="/images/12.jpeg" />
+            </a>
+          </div>
+          <main class="main-content">
+            <h2><a href="#"><%=items.title%></a></h2>
+            <p><%=items.body.slice(0,250)%>....</p>
+          </main>
+          <div class="blog-footer">
+            <div class="readMore"><a href=<%=items._id%>>Read More</a></div>
+            <div>
+              <i id="heart" class="fa-regular fa-heart"></i>
+              <i id="like" class="fa-regular fa-thumbs-up"></i>
+            </div>
+          </div>
+        </div>
+      <%})%>
+    </div>
+
+    <div class="your_blogs all-blogs">
+      <%blogs.forEach(function(items){%>
+        <div class="card-container">
+          <div class="img-div">
+            <a href="/" class="hero-image-container">
+              <img class="hero-image" src=<%=items.img%> />
+            </a>
+          </div>
+          <main class="main-content">
+            <h2><a href="#"><%=items.title%></a></h2>
+            <p><%=items.body.slice(0,250)%>....</p>
+          </main>
+          <div class="blog-footer">
+            <div class="readMore"><a href=<%=items._id%>>Read More</a></div>
+            <div>
+              <i id="heart" class="fa-regular fa-heart"></i>
+              <i id="like" class="fa-regular fa-thumbs-up"></i>
+            </div>
+          </div>
+        </div>
+      <%})%>
+    </div>
+
+  </div>
+</body>
+<script type="text/javascript" src="/js/blog.js"></script>
+<script>
+  const x=Math.random()*19;
+</script>
+</html>

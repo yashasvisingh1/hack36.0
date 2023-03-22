@@ -43,7 +43,18 @@ const User=require("./src/models/userauth");
 // app.use("/",viewprofile);
 const createToken=require("./routes/auth/createtoken");
 
+const blog = require("./routes/pages/blog");
+const createblog=require("./routes/pages/createblog");
+const userData=require("./src/models/userdata");
+const form=require("./routes/auth/form");
+//use statements
+app.use(blog);
+app.use(createblog);
+app.use(form);
+
+
 app.get("/",async (req,res)=>{
+  console.log("get");
     try{
         res.status(200).render("home");
     
@@ -57,14 +68,14 @@ app.get("/login",async function(req,res){
   } catch (error) {
     res.status(401).send(error);
   }
-})
+});
 app.get("/register",async function(req,res){
   try {
     res.status(200).render("register");
   } catch (error) {
     res.status(401).send(error);
   }
-})
+});
 app.get("/form",async function(req,res){
   const user=await isAuth(req);
   if(user){
@@ -73,7 +84,7 @@ app.get("/form",async function(req,res){
   }else{
     res.send("not authenticated");
   }
-})
+});
 app.get("/secrets",async function(req,res){
   //console.log(req);
   const user=await isAuth(req);
@@ -83,7 +94,7 @@ app.get("/secrets",async function(req,res){
   }else{
     res.send("not authenticated");
   }
-})
+});
 app.post("/register",async function(req,res){
     let password=req.body.password;
     let cpassword=req.body.confirmpassword;
@@ -137,9 +148,12 @@ app.post("/login",async function(req,res){
     console.log("error");
   }
 })
-app.post("/form",async function(req,res){
-  
-})
+
+
+app.get("*",async (req,res)=>{
+  res.status(404).render("error/error.ejs");
+});
+
 const PORT = 3000;
 http.listen(PORT, (req, res) => {
   console.log(`server started on port:${PORT}`);
