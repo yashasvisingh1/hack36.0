@@ -147,8 +147,8 @@
                 faceLandmarksDetection.SupportedPackages.mediapipeFacemesh
             );
             // Load Emotion Detection
-            emotionModel = await tf.loadLayersModel( 'web/model/facemo.json' );
-
+            emotionModel = await tf.loadLayersModel( '/js/web/model/facemo.json' );
+            console.log(emotionModel);
             setText( "Loaded!" );
 
             trackFace();

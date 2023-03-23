@@ -2,15 +2,28 @@ require("../db/connection");
 const mongoose = require("mongoose");
 
 const blogDataSchema={
-    email:String,
-    name:String,
-    title:String,
-    body:String,
-    keywords:[],
+    email:{
+        type:String,
+        required:true
+    },
+    name:{
+        type:String,
+        required:true
+    },
+    title:{
+        type:String,
+        required:true
+    },
+    body:{
+        type:String,
+        required:true
+    },
+    keywords:String,
     comment:[{
         user:String,
         msg:String,
     }],
+    likedUsers:[],
     rating:Number,
     img:String,
 }
