@@ -11,6 +11,7 @@ const http = require("http").Server(app);
 const io = require("socket.io")(http);
 const Web = require( "webwebweb" );
 const fs = require( "fs" );
+var room;
 // const mongoose=require("mongoose");
 
 
@@ -50,11 +51,14 @@ const createblog=require("./routes/pages/createblog");
 const userData=require("./src/models/userdata");
 const form=require("./routes/auth/form");
 const focus=require("./routes/pages/focus");
+
+
 //use statements
 app.use(blog);
 app.use(createblog);
 app.use(form);
 app.use(focus);
+
 
 app.get("/",async (req,res)=>{
   console.log("get");
@@ -152,9 +156,17 @@ app.post("/login",async function(req,res){
   }
 })
 
-// app.get("/blog",function(req,res){
-//   res.sendFile(__dirname+"/Emotion.html");
-// })
+app.get("/call/room.html",(req,res)=>{
+  console.log("video call called");
+  res.sendFile(__dirname+"/room.html");
+});
+
+app.get("/call/:roomid",async function(req,res){
+  room = req.params.roomId;
+  res.sendFile(__dirname+"/lobby.html");
+});
+
+
 
 app.get("*",async (req,res)=>{
   res.status(404).render("error/error.ejs");
