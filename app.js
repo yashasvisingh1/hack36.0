@@ -4,6 +4,7 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
+var nodemailer = require('nodemailer');
 const cookieSession = require("cookie-session");
 const passport = require("passport");
 const bcrypt = require("bcryptjs");
@@ -33,7 +34,7 @@ const User=require("./src/models/userauth");
 // const Auth = require("./routes/auth/auth");
 // const api = require("./src/api/api");
 // const sos = require("./routes/sos/sos");
-// const UserDetail = require("./src/models/userDetails");
+//const UserDetail = require("./src/models/userDetails");
   const isAuth = require("./routes/auth/isauth");
 // const Chat = require("./src/models/chat");
 
@@ -45,13 +46,14 @@ const createToken=require("./routes/auth/createtoken");
 
 const blog = require("./routes/pages/blog");
 const createblog=require("./routes/pages/createblog");
-const userData=require("./src/models/userdata");
+const UserData=require("./src/models/userdata");
 const form=require("./routes/auth/form");
+const otp=require("./routes/auth/otp")
 //use statements
 app.use(blog);
 app.use(createblog);
 app.use(form);
-
+app.use(otp)
 
 app.get("/",async (req,res)=>{
   console.log("get");
@@ -115,7 +117,7 @@ app.post("/register",async function(req,res){
         password:password
       })
       //user=isAuth(req);
-      user.save();
+      await user.save();
       const token=await createToken(user._id);
       res.cookie("jwt", token.toString(), {
         expires: new Date(Date.now() + 6000000),
@@ -127,6 +129,8 @@ app.post("/register",async function(req,res){
       res.redirect("/register")
     }
 })
+
+
 app.post("/login",async function(req,res){
   const email=req.body.email;
   let password=req.body.password;

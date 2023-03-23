@@ -21,7 +21,7 @@
   <link href="vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all" />
 
   <!-- Main CSS-->
-  <link href="/auth/form.css" rel="stylesheet" />
+  <link href="/css/auth/form.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -29,13 +29,13 @@
     <div class="card-body">
       <div><h2>Create Your Profile</h2></div>
 
-      <form method="POST" action="/form">
+      <form method="post" action="/form">
         <div class="form-div">
-          <input name="name" type="text" placeholder="name" required/>
-          <input name="age" type="text" placeholder="age" required/>
-          <input name="phone" type="number" placeholder="phone" required/>
-          <input name="city" type="text" placeholder="city" required/>
-          <input name="country" type="text" placeholder="country" required/>
+          <input name="name" type="text" placeholder="name" name="name"required/>
+          <input name="age" type="text" placeholder="age" name="age" required/>
+          <input name="phone" type="number" placeholder="phone" name="phone" required/>
+          <input name="city" type="text" placeholder="city" name="city" required/>
+          <input name="country" type="text" placeholder="country" name="country" required/>
           <select name="category" class="select" required>
             <option value="" disabled="disabled" selected="selected">Category</option>
             <option value="Relationship">Relationship</option>
