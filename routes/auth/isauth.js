@@ -9,7 +9,7 @@ app.use(cookieParser());
 const isAuth = async (req) => {
   try {
     const token = await req.cookies.jwt;
-    console.log("helllllo " + token);
+    // console.log("helllllo " + token);
     const verifyUser = await jwt.verify(token, process.env.SECRET);
     let user = await User.findOne({ _id: verifyUser._id }).select({
       username: 1,
