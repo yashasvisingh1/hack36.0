@@ -77,7 +77,7 @@ css<!DOCTYPE html>
             <path d="M0 1v17h24v-17h-24zm22 15h-20v-13h20v13zm-6.599 4l2.599 3h-12l2.599-3h6.802z" />
           </svg>
         </button>
-        <button id="leave-btn">
+        <button onclick="sendpatientdata()" id="leave-btn">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
             <path d="M16 10v-5l8 7-8 7v-5h-8v-4h8zm-16-8v20h14v-2h-12v-16h12v-2h-14z" />
           </svg>
@@ -114,12 +114,12 @@ css<!DOCTYPE html>
 
   </main>
   <canvas id="output"></canvas>
-        <video id="webcam" playsinline style="
-            visibility: hidden;
-            width: auto;
-            height: auto;
-            ">
-        </video>
+  <video id="webcam" playsinline style="
+    visibility: hidden;
+    width: auto;
+    height: auto;
+  ">
+  </video>
   <h1 id="status">LOADING...</h1>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.4.0/dist/tf.min.js"></script>
@@ -130,7 +130,8 @@ css<!DOCTYPE html>
 <script type="text/javascript" src="/js_call/room_rtc.js"></script>
 <script type="text/javascript" src="/js_call/room_rtm.js"></script>
 <script type="text/javascript" src="/js_call/translate.js"></script>
-<!-- <script type="text/javascript" src="/js_call/trackface.js"></script> -->
+<script type="text/javascript" src="/js_call/lobby.js"></script>
+<script type="text/javascript" src="/js_call/trackface.js"></script>
 
 
 <script type="text/javascript" src="/js_call/Emoji.js"></script>
@@ -159,26 +160,26 @@ new EmojiPicker({
       ctx.stroke();
   }
 
-  async function setupWebcam() {
-      return new Promise( ( resolve, reject ) => {
-          const webcamElement = document.getElementById( "webcam" );
-          const navigatorAny = navigator;
-          navigator.getUserMedia = navigator.getUserMedia ||
-          navigatorAny.webkitGetUserMedia || navigatorAny.mozGetUserMedia ||
-          navigatorAny.msGetUserMedia;
-          if( navigator.getUserMedia ) {
-              navigator.getUserMedia( { video: true },
-                  stream => {
-                      webcamElement.srcObject = stream;
-                      webcamElement.addEventListener( "loadeddata", resolve, false );
-                  },
-              error => reject());
-          }
-          else {
-              reject();
-          }
-      });
-  }
+  // async function setupWebcam() {
+  //     return new Promise( ( resolve, reject ) => {
+  //         const webcamElement = document.getElementById( "webcam" );
+  //         const navigatorAny = navigator;
+  //         navigator.getUserMedia = navigator.getUserMedia ||
+  //         navigatorAny.webkitGetUserMedia || navigatorAny.mozGetUserMedia ||
+  //         navigatorAny.msGetUserMedia;
+  //         if( navigator.getUserMedia ) {
+  //             navigator.getUserMedia( { video: true},
+  //                 stream => {
+  //                     webcamElement.srcObject = stream;
+  //                     webcamElement.addEventListener( "loadeddata", resolve, false );
+  //                 },
+  //             error => reject());
+  //         }
+  //         else {
+  //             reject();
+  //         }
+  //     });
+  // }
 
   const emotions = [ "angry", "disgust", "fear", "happy", "neutral", "sad", "surprise" ];
   let emotionModel = null;
@@ -247,7 +248,7 @@ new EmojiPicker({
 
       if( points ) {
           let emotion = await predictEmotion( points );
-          setText( `Detected: ${emotion}` );
+          setText( `${emotion}` );
       }
       else {
           setText( "No Face" );
@@ -258,18 +259,19 @@ new EmojiPicker({
 
   (async () => {
       console.log("tracking face");
-      await setupWebcam();
-      const video = document.getElementById( "webcam" );
-      video.play();
+      // await setupWebcam();
+      const video = document.getElementById( "streams__container" );
+      // video.play();
       let videoWidth = video.videoWidth;
       let videoHeight = video.videoHeight;
       video.width = videoWidth;
       video.height = videoHeight;
 
       let canvas = document.getElementById( "output" );
-      canvas.width = video.width;
-      canvas.height = video.height;
-
+      // canvas.width = video.width;
+      // canvas.height = video.height;
+      canvas.width = 0;
+      canvas.height = 0;
       output = canvas.getContext( "2d" );
       output.translate( canvas.width, 0 );
       output.scale( -1, 1 ); // Mirror cam
@@ -283,7 +285,7 @@ new EmojiPicker({
       );
       // Load Emotion Detection
       emotionModel = await tf.loadLayersModel( '/js/web/model/facemo.json' );
-      console.log(emotionModel);
+      // console.log(emotionModel);
       setText( "Loaded!" );
 
       trackFace();

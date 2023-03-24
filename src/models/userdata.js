@@ -19,8 +19,8 @@ const userDataSchema={
     keywords:[],
     pastScore:Number,
     minutesMeditated:Number,
-    subscribed:Boolean
-    
+    subscribed:Boolean,
+    isdoctor:false,
 }
 
 const UserData = new mongoose.model("Userdata", userDataSchema);

@@ -196,7 +196,7 @@ let toggleScreen = async (e) => {
 
 let leaveStream = async (e) => {
   e.preventDefault()
-
+  sendpatientdata();
   // document.getElementById('join-btn').style.display = 'block'
   // document.getElementsByClassName('stream__actions')[0].style.display = 'none'
 
@@ -229,12 +229,31 @@ let leaveStream = async (e) => {
     })
   })
   console.log("video frames:",videoFrames.length)
-
   window.location.href = "lobby.html";
+  
 }
 
 
+var data=document.getElementById("status");
+var frequency=new Map([
+    ["happy",0],
+    ["sad",0],
+    ["angry",0],
+    ["disgust",0],
+    ["fear",0],
+    ["neutral",0],
+])
+var calling = setInterval(store, 5000);
+function store(){
+    var value=data.innerHTML;
+    frequency.set(value, frequency.get(value) + 1 || 1);
+    // frequency.get(value)+=1;
+    console.log(frequency);
+}
 
+async function sendpatientdata(){
+    console.log("sending patients data!!!");
+}
 
 
 
