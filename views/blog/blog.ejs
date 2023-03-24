@@ -31,50 +31,42 @@
     </div>
     <div class="back"><h2>CHOOSE YOUR CATEGORIES:</h2></div>
     <div class="category">
-      <div class="category-div">
-        <input type="checkbox"><label>Recommended</label>
-        <input type="checkbox"><label>Relationship</label>
-        <input type="checkbox"><label>Self Care</label>
-        <input type="checkbox"><label>Covid 19</label>
-        <input type="checkbox"><label>Anxiety</label>
-        <input type="checkbox"><label>Depression</label>
-        <input type="checkbox"><label>Mindfulness</label>
-        <input type="checkbox"><label>Burnout</label>
-        <input type="checkbox"><label>Mental Wellness</label>
-        <input type="checkbox"><label>Guilt</label>
-        <input type="checkbox"><label>Anger</label>
-        <input type="checkbox"><label>Therapy</label>
-        <input type="checkbox"><label>Psychology</label>
-        <input type="checkbox"><label>Exercises</label>
-        <input type="checkbox"><label>OCD</label>
-      </div>
+        <div class="category-div">
+          <input  onclick="window.location='/blog/chosen/Recommended'" name="choosers" class="category-chooser" value="Recommended" type="radio"><label>Recommended</label>
+          <input  onclick="window.location='/blog/chosen/Relationship'" name="choosers" class="category-chooser" value="Relationship" type="radio"><label>Relationship</label>
+          <input  onclick="window.location='/blog/chosen/Self Care'" name="choosers" class="category-chooser" value="Self Care" type="radio"><label>Self Care</label>
+          <input  onclick="window.location='/blog/chosen/Covid 19'" name="choosers" class="category-chooser" value="Covid 19" type="radio"><label>Covid 19</label>
+          <input  onclick="window.location='/blog/chosen/Anxiety'" name="choosers" class="category-chooser" value="Anxiety" type="radio"><label>Anxiety</label>
+          <input  onclick="window.location='/blog/chosen/Depression'" name="choosers" class="category-chooser" value="Depression" type="radio"><label>Depression</label>
+          <input  onclick="window.location='/blog/chosen/Mindfulness'" name="choosers" class="category-chooser" value="Mindfulness" type="radio"><label>Mindfulness</label>
+          <input  onclick="window.location='/blog/chosen/Burnout'" name="choosers" class="category-chooser" value="Burnout" type="radio"><label>Burnout</label>
+          <input  onclick="window.location='/blog/chosen/Mental Wellness'" name="choosers" class="category-chooser" value="Mental Wellness" type="radio"><label>Mental Wellness</label>
+          <input  onclick="window.location='/blog/chosen/Guilt'" name="choosers" class="category-chooser" value="Guilt" type="radio"><label>Guilt</label>
+          <input  onclick="window.location='/blog/chosen/Anger'" name="choosers" class="category-chooser" value="Anger" type="radio"><label>Anger</label>
+          <input  onclick="window.location='/blog/chosen/Therapy'" name="choosers" class="category-chooser" value="Therapy" type="radio"><label>Therapy</label>
+          <input  onclick="window.location='/blog/chosen/Psychology'" name="choosers" class="category-chooser" value="Psychology" type="radio"><label>Psychology</label>
+          <input  onclick="window.location='/blog/chosen/Exercises'" name="choosers" class="category-chooser" value="Exercises" type="radio"><label>Exercises</label>
+          <input  onclick="window.location='/blog/chosen/OCD'" name="choosers" class="category-chooser" value="OCD" type="radio"><label>OCD</label>
+        </div>
       
     </div>
-    
-    <div class="all-blogs">
-      <%blogs.forEach(function(items){%>
-        <div class="card-container">
-          <div class="img-div">
-            <a href="/" class="hero-image-container">
-              <img class="hero-image" src="/images/12.jpeg" />
-            </a>
-          </div>
-          <main class="main-content">
-            <h2><a href="#"><%=items.title%></a></h2>
-            <p><%=items.body.slice(0,250)%>....</p>
-          </main>
-          <div class="blog-footer">
-            <div class="readMore"><a href=<%=items._id%>>Read More</a></div>
-            <div>
-              <i id="heart" class="fa-regular fa-heart"></i>
-              <i id="like" class="fa-regular fa-thumbs-up"></i>
-            </div>
+    <div class="choose">
+      <div onclick="toggle1()" id="choose1" class="blue">
+        <p>Category Wise Blogs</p>
+      </div>
+      <div onclick="toggle2()" id="choose2" class="dark">
+        <p>Your Blogs</p>
+      </div>
+    </div>
+    <div id="all_blogs" class="all-blogs">
+      <%if(blogs.length==0){%>
+        <div class="no_data_div">
+          <div>
+            <img class="no_data" src="/images/nodata.avif">
+            <p>You Have Not Posted Any Blogs 😓😱😓.Let's Write That Today!!</p>
           </div>
         </div>
-      <%})%>
-    </div>
-
-    <div class="your_blogs all-blogs">
+      <%}else{%>
       <%blogs.forEach(function(items){%>
         <div class="card-container">
           <div class="img-div">
@@ -89,18 +81,56 @@
           <div class="blog-footer">
             <div class="readMore"><a href=<%=items._id%>>Read More</a></div>
             <div>
-              <i id="heart" class="fa-regular fa-heart"></i>
-              <i id="like" class="fa-regular fa-thumbs-up"></i>
+              <i onclick="addtofavourites()" id="heart" class="fa-regular fa-heart"></i>
+                <i id="like" onclick="increaselike()" class="fa-regular fa-thumbs-up" ></i>
+                <i id="dislike" onclick="decreaselike()" class="fa-solid fa-thumbs-up hide"></i>
+                <span id="rating"><%=items.rating%></span>
+                <span id="fetcher" class="hide"><%=items._id%></span>
             </div>
           </div>
         </div>
       <%})%>
+      <%}%>
+      
+    </div>
+
+    <div id="your_blogs" class="hide all-blogs">
+
+      <%if(your_data.length==0){%>
+        <div class="no_data_div">
+          <div>
+            <img class="no_data" src="/images/nodata.avif">
+            <p>You Have Not Posted Any Blogs 😓😱😓.Let's Write That Today!!</p>
+          </div>
+        </div>
+      <%}else{%>
+      <%your_data.forEach(function(items){%>
+        <div class="card-container">
+          <div class="img-div">
+            <a href="/" class="hero-image-container">
+              <img class="hero-image" src=<%=items.img%> />
+            </a>
+          </div>
+          <main class="main-content">
+            <h2><a href="#"><%=items.title%></a></h2>
+            <p><%=items.body.slice(0,250)%>....</p>
+          </main>
+          <div class="blog-footer">
+            <div class="readMore"><a href=<%=items._id%>>Read More</a></div>
+            <div>
+              <i onclick="addtofavourites()" id="heart" class="fa-regular fa-heart"></i>
+                <i id="like" onclick="increaselike()" class="fa-regular fa-thumbs-up" ></i>
+                <i id="dislike" onclick="decreaselike()" class="fa-solid fa-thumbs-up hide"></i>
+                <span id="rating"><%=items.rating%></span>
+                <span id="fetcher" class="hide"><%=items._id%></span>
+            </div>
+          </div>
+        </div>
+      <%})%>
+      <%}%>
     </div>
 
   </div>
 </body>
 <script type="text/javascript" src="/js/blog.js"></script>
-<script>
-  const x=Math.random()*19;
-</script>
 </html>

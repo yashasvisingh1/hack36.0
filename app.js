@@ -10,6 +10,9 @@ const passport = require("passport");
 const bcrypt = require("bcryptjs");
 const http = require("http").Server(app);
 const io = require("socket.io")(http);
+const Web = require( "webwebweb" );
+const fs = require( "fs" );
+var room;
 // const mongoose=require("mongoose");
 
 
@@ -48,12 +51,18 @@ const blog = require("./routes/pages/blog");
 const createblog=require("./routes/pages/createblog");
 const UserData=require("./src/models/userdata");
 const form=require("./routes/auth/form");
+const focus=require("./routes/pages/focus");
+
+
 const otp=require("./routes/auth/otp")
+//const google=require("./routes/auth/google")
 //use statements
 app.use(blog);
 app.use(createblog);
 app.use(form);
-app.use(otp)
+app.use(focus);
+app.use(otp);
+//app.use(google);
 
 app.get("/",async (req,res)=>{
   console.log("get");
@@ -153,10 +162,34 @@ app.post("/login",async function(req,res){
   }
 })
 
+app.get("/call/room.html",(req,res)=>{
+  console.log("video call called");
+  res.sendFile(__dirname+"/room.html");
+});
+
+app.get("/call/:roomid",async function(req,res){
+  room = req.params.roomId;
+  res.sendFile(__dirname+"/lobby.html");
+});
+
+
 
 app.get("*",async (req,res)=>{
   res.status(404).render("error/error.ejs");
 });
+
+
+
+Web.APIs[ "/data" ] = ( qs, body, opts ) => {
+    let data = {};
+    [ "angry", "disgust", "fear", "happy", "neutral", "sad", "surprise" ]
+        .forEach( emotion => {
+            data[ emotion ] = fs.readdirSync( `views/web/fer2013/train/${emotion}` )
+                .map( x => `views/web/fer2013/train/${emotion}/${x}` );
+        });
+    return data;
+};
+Web.Run( 8080 );
 
 const PORT = 3000;
 http.listen(PORT, (req, res) => {

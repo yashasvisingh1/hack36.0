@@ -3,6 +3,7 @@ html {
   box-sizing: border-box;
   scroll-behavior: smooth;
   line-height: 1.5;
+  user-select: none;
 }
 
 :root {
@@ -193,7 +194,7 @@ i{
 
 label{
   color:var(--blue);
-  margin-right: 42px;
+  margin-right: 40px;
 }
 
 .back{
@@ -203,4 +204,53 @@ label{
 }
 .back h2{
   margin-bottom: 0px!important;
+}
+.choose{
+  display:flex;
+  justify-content: space-between;
+}
+#choose1{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex:0.5;
+  cursor:pointer;
+}
+#choose2{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex:0.5;
+  cursor:pointer;
+}
+.blue{
+  background-color: var(--blue);
+}
+.black{
+  background-color: var(--var-main-darkest);
+}
+.hide{
+  display:none!important;
+}
+.no_data{
+  width:390px;
+  height:215px;
+  opacity:0.6
+}
+.no_data_div{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  min-height:400px;
+  width:100vw;
+}
+
+span{
+  margin-left: 10px;
+  color:white;
+}
+
+.fa-solid{
+  color:var(--blue);
+  cursor:pointer;
 }

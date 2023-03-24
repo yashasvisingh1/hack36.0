@@ -62,7 +62,6 @@ router.post("/enterotp", async function (req, res) {
   let data = await OtpData.findOne({ email: req.body.email });
   let user = await User.findOne({ email: req.body.email });
   let curr_time = new Date().getTime();
-  console.log("hello babbby");
   if (data) {
     console.log(data.code + "   " + data.expireIn + "  " + curr_time);
     if (data.code === req.body.otp && data.expireIn > curr_time) {
@@ -93,6 +92,7 @@ router.post("/changepassword", async function (req, res) {
     password = await newpassword(password);
     const hey=await User.findOneAndUpdate({email:user.email},{password:password},{new:true});
     console.log(hey);
+    await OtpData.findOneAndDelete({ email: user.email });
     res.redirect("/secrets")
   }else{
     console.log("password and confirm password do not match");
