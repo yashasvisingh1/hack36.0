@@ -17,7 +17,7 @@ router.post("/enteremail", async function (req, res) {
   let data = await User.findOne({ email: req.body.email });
   let otpalr = await OtpData.findOneAndDelete({ email: req.body.email });
   if (data) {
-    let otpCode = Math.floor(Math.random() * 10000 + 1).toString();
+    let otpCode = Math.floor(Math.random() * 1000000 + 1).toString();
     let otpData = new OtpData({
       email: req.body.email,
       code: otpCode,

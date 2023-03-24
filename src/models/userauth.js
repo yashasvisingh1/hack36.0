@@ -19,6 +19,9 @@ const userSchema = new mongoose.Schema({
     googleid :{
         type : String
     },
+    isverified:{
+        type:Boolean
+    },
     tokens : [{
         token : {
             type : String
