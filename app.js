@@ -121,7 +121,9 @@ app.get("/secrets", async function (req, res) {
     res.send("not authenticated");
   }
 });
-
+app.get("/contact",function(req,res){
+  res.render("contact");
+})
 app.post("/register", async function (req, res) {
   let password = req.body.password;
   let cpassword = req.body.confirmpassword;
