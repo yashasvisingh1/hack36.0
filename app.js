@@ -69,6 +69,10 @@ app.use(verify);
 app.get("/", async (req, res) => {
   console.log("get");
   try {
+    const user=await isAuth(req);
+    if(user){
+      res.redirect("/secrets");
+    }
     res.status(200).render("home");
   } catch (err) {
     res.status(401).send(err);
