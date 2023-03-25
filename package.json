@@ -1,0 +1,16 @@
+{
+  "name": "Emotion Detection",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "webwebweb": "^1.4.0"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "web/fer2013"
+    ]
+  }
+}
