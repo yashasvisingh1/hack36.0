@@ -79,6 +79,10 @@ app.use(bot);
 app.get("/", async (req, res) => {
   console.log("get");
   try {
+    const user=await isAuth(req);
+    if(user){
+      res.redirect("/secrets");
+    }
     res.status(200).render("home");
   } catch (err) {
     res.status(401).send(err);
@@ -112,12 +116,14 @@ app.get("/secrets", async function (req, res) {
   const user = await isAuth(req);
   if (user) {
     console.log(user);
-    res.render("secrets");
+    res.render("front");
   } else {
     res.send("not authenticated");
   }
 });
-
+app.get("/contact",function(req,res){
+  res.render("contact");
+})
 app.post("/register", async function (req, res) {
   let password = req.body.password;
   let cpassword = req.body.confirmpassword;

@@ -21,44 +21,70 @@
   <link href="vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all" />
 
   <!-- Main CSS-->
-  <link href="/css/auth/form.css" rel="stylesheet" />
+  <link href="/css/form.css" rel="stylesheet" />
+
+  <!--font-->
+
+  <!-- barlow condensed -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Sacramento&display=swap"
+    rel="stylesheet">
+
+  <!--roboto-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Roboto&family=Sacramento&display=swap"
+    rel="stylesheet">
 </head>
 
 <body>
-  <div class="">
-    <div class="card-body">
-      <div><h2>Create Your Profile</h2></div>
+  <div class="outer">
 
-      <form method="post" action="/form">
-        <div class="form-div">
-          <input name="name" type="text" placeholder="name" name="name"required/>
-          <input name="age" type="text" placeholder="age" name="age" required/>
-          <input name="phone" type="number" placeholder="phone" name="phone" required/>
-          <input name="city" type="text" placeholder="city" name="city" required/>
-          <input name="country" type="text" placeholder="country" name="country" required/>
-          <select name="category" class="select" required>
-            <option value="" disabled="disabled" selected="selected">Category</option>
-            <option value="Relationship">Relationship</option>
-            <option value="Self-Care">Self-Care</option>
-            <option value="Covid-19">Covid-19</option>
-            <option value="Anxiety">Anxiety</option>
-            <option value="Depression">Depression</option>
-            <option value="Mindfulness">Mindfulness</option>
-            <option value="Burnout">Burnout</option>
-            <option value="Mental Wellness">Mental Wellness</option>
-            <option value="Guilt">Guilt</option>
-            <option value="Anger">Anger</option>
-            <option value="Therapy">Therapy</option>
-            <option value="Psychology">Psychology</option>
-            <option value="Exercises">Exercises</option>
-            <option value="OCD">OCD</option>
-        </select>
-        </div>
-        <button type="submit">Submit</button>
-      </form>
+    <div class="card-body parent">
+      <div class="child1">
+        <h2>Create<br>Your<br>Profile</h2>
+      </div>
+      <div class="child2">
+        <form method="post" action="/form">
+          <div class="form-div">
+            <input name="name" type="text" placeholder="name" name="name" required />
+            <br>
+            <input name="age" type="text" placeholder="age" name="age" required />
+            <br>
+            <input name="phone" type="number" placeholder="phone" name="phone" required />
+            <br>
+            <input name="city" type="text" placeholder="city" name="city" required />
+            <br>
+            <input name="country" type="text" placeholder="country" name="country" required />
+            <br>
+            <select name="category" class="select" required>
+              <option value="" disabled="disabled" selected="selected">Category</option>
+              <option value="Relationship">Relationship</option>
+              <option value="Self-Care">Self-Care</option>
+              <option value="Covid-19">Covid-19</option>
+              <option value="Anxiety">Anxiety</option>
+              <option value="Depression">Depression</option>
+              <option value="Mindfulness">Mindfulness</option>
+              <option value="Burnout">Burnout</option>
+              <option value="Mental Wellness">Mental Wellness</option>
+              <option value="Guilt">Guilt</option>
+              <option value="Anger">Anger</option>
+              <option value="Therapy">Therapy</option>
+              <option value="Psychology">Psychology</option>
+              <option value="Exercises">Exercises</option>
+              <option value="OCD">OCD</option>
 
+            </select>
+            <br>
+            <button type="submit" class="btn">Submit</button>
+          </div>
+          
+        </form>
+      </div>
     </div>
-      
+  </div>
   </div>
 
   <!-- Jquery JS-->
