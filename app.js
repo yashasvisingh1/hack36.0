@@ -116,7 +116,7 @@ app.get("/secrets", async function (req, res) {
   const user = await isAuth(req);
   if (user) {
     console.log(user);
-    res.render("secrets");
+    res.render("front");
   } else {
     res.send("not authenticated");
   }
