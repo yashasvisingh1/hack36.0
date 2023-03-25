@@ -1,6 +1,7 @@
 require("../db/connection");
 const mongoose=require("mongoose");
-
+// const passportLocalMongoose = require("passport-local-mongoose");
+// const findOrCreate = require("mongoose-findorcreate");
 const userSchema = new mongoose.Schema({
     username : {
         type : String,
@@ -18,6 +19,9 @@ const userSchema = new mongoose.Schema({
     googleid :{
         type : String
     },
+    isverified:{
+        type:Boolean
+    },
     tokens : [{
         token : {
             type : String
@@ -27,5 +31,6 @@ const userSchema = new mongoose.Schema({
 
 //model
 const User = new mongoose.model("User",userSchema);
-
+// userSchema.plugin(passportLocalMongoose);
+// userSchema.plugin(findOrCreate);
 module.exports = User;

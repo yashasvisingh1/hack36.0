@@ -4,8 +4,7 @@ const mongoose = require("mongoose");
 const userDataSchema={
     personalInfo:{
         name:String,
-        dob:Date,
-        gender:String,
+        age:Number,
         phone:String,
         city:String,
         email:String,
@@ -20,8 +19,12 @@ const userDataSchema={
     pastScore:Number,
     minutesMeditated:Number,
     subscribed:Boolean,
-    isdoctor:false,
+    isdoctor:{
+        type:Boolean,
+        default:false,
+    },
+    email:String,
 }
 
-const UserData = new mongoose.model("Userdata", userDataSchema);
+const UserData = new mongoose.model("UserData", userDataSchema);
 module.exports = UserData;

@@ -233,6 +233,14 @@ let leaveStream = async (e) => {
   
 }
 
+let sendData=async(e)=>{
+  console.log("sending data");
+  var room=urlParams.get('room')
+  var url="/viewdata/";
+  url=url.concat(room);
+  window.location=url;
+}
+
 
 var data=document.getElementById("status");
 var frequency=new Map([
@@ -248,7 +256,7 @@ function store(){
     var value=data.innerHTML;
     frequency.set(value, frequency.get(value) + 1 || 1);
     // frequency.get(value)+=1;
-    console.log(frequency);
+    // console.log(frequency);
 }
 
 async function sendpatientdata(){
@@ -263,4 +271,5 @@ document.getElementById('camera-btn').addEventListener('click', toggleCamera)
 document.getElementById('mic-btn').addEventListener('click', toggleMic)
 document.getElementById('screen-btn').addEventListener('click', toggleScreen)
 document.getElementById('leave-btn').addEventListener('click', leaveStream)
+document.getElementById('senddata-btn').addEventListener('click', sendData)
 joinRoomInit()
