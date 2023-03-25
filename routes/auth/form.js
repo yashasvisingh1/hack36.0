@@ -29,6 +29,9 @@ router.post("/form",async function(req,res){
       email:email
     })
     await userData.save();
+    if(req.body.code==="111"){
+      await UserData.findOneAndUpdate({email:email},{isdoctor:true});
+    }
     // const data=await UserData.findOne({email:email});
     // await data.keywords.push(req.body.category);
     console.log(userData);
