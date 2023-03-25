@@ -56,14 +56,24 @@ const form = require("./routes/auth/form");
 const focus = require("./routes/pages/focus");
 const verify=require("./routes/auth/verify");
 const otp = require("./routes/auth/otp");
+const storepatientdata=require("./routes/pages/storeemotions");
+const showpatientdata=require("./routes/pages/patientdata");
+
+
 //const google=require("./routes/auth/google")
 //use statements
+
+
 app.use(blog);
 app.use(createblog);
 app.use(form);
 app.use(focus);
 app.use(otp);
 app.use(verify);
+app.use(storepatientdata);
+app.use(showpatientdata);
+
+
 //app.use(google);
 
 app.get("/", async (req, res) => {

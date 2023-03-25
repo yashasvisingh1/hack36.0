@@ -28,5 +28,5 @@ const blogDataSchema={
     img:String,
 }
 
-const blogData = new mongoose.model("blogdata", blogDataSchema);
-module.exports = blogData;
+const blogdata = new mongoose.model("blogdata", blogDataSchema);
+module.exports = blogdata;

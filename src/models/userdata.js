@@ -18,7 +18,12 @@ const userDataSchema={
     keywords:[],
     pastScore:Number,
     minutesMeditated:Number,
-    subscribed:Boolean    
+    subscribed:Boolean,
+    isdoctor:{
+        type:Boolean,
+        default:false,
+    },
+    email:String,
 }
 
 const UserData = new mongoose.model("UserData", userDataSchema);

@@ -25,7 +25,8 @@ router.post("/form",async function(req,res){
         email:email,
         country:req.body.country,
       },
-      keywords:[req.body.category]
+      keywords:[req.body.category],
+      email:email
     })
     await userData.save();
     // const data=await UserData.findOne({email:email});

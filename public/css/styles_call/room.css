@@ -355,3 +355,14 @@ select{
 .stream__actions button:hover {
   background-color: var(--primarycolor);
 }
+
+
+#ouput{
+  display: none;
+}
+
+.senddata{
+  width:24px;
+  height:24px;
+}
+
