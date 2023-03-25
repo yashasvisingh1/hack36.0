@@ -4,7 +4,7 @@
         <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.4.0/dist/tf.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/face-landmarks-detection@0.0.1/dist/face-landmarks-detection.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/party-js@1.0.0/party.min.js"></script>
-        <script src="//code.tidio.co/vgrlseqwuxtimdoucxpzxj74fphpiu3v.js" async></script>
+        <!--<script src="//code.tidio.co/vgrlseqwuxtimdoucxpzxj74fphpiu3v.js" async></script>-->
         
     </head>
     <body>
@@ -48,6 +48,7 @@
         var leftEyesDist = 0;
         var rightEyesDist = 0;
         var noseTip = 0;
+        var eyes = 0,  countX= 0, countY = 0, accumulate = 0;
         //var = 
 
         async function trackFace() {
@@ -90,10 +91,10 @@
                     ( face.annotations.noseTip[ 0 ][ 2 ] - face.annotations.noseTip[ 0 ][ 2 ] ) ** 2
                 );
 
-                if( leftEyesDist / faceScale < 23.5 ) {
+                if( leftEyesDist / faceScale < 18 ) {
                     areEyesClosed = true;
                 }
-                if( rightEyesDist / faceScale < 23.5 ) {
+                if( rightEyesDist / faceScale < 18 ) {
                     areEyesClosed = true;
                 }
 
@@ -104,20 +105,51 @@
                     ( face.annotations.lipsLowerInner[ 5 ][ 2 ] - face.annotations.lipsUpperInner[ 5 ][ 2 ] ) ** 2
                 );
                 // Scale to the relative face size
-                if( lipsDist / faceScale > 20 ) {
+                if( lipsDist / faceScale > 18 ) {
                     isMouthOpen = true;
                 }
             });
 
-            if( !didParty && ( areEyesClosed || isMouthOpen ) ) {
-                console.log(party.screen());
-            }
-            didParty = areEyesClosed || isMouthOpen;
+            // if( !didParty && ( areEyesClosed || isMouthOpen ) ) {
+            //     console.log(party.screen());
+            // }
+            // didParty = areEyesClosed || isMouthOpen;
             var center = Math.abs(rightEyesDist-leftEyesDist);
             var vert = Math.sqrt((center**2) + (noseTip**2))
 
             setText( `Eyes: ${areEyesClosed} Mouth: ${isMouthOpen} X: ${center} Y: ${vert}` );
-            requestAnimationFrame( trackFace );
+            trackFace();
+            //requestAnimationFrame(  );
+            // from here, save in the DataBase. If vert >2.5 or <.3, flag = true(Not focused).\
+            let isX = false, isY = false;
+
+            if (vert>2  && vert < 0.3){
+                isY = true;
+            }
+            if (center>2){
+                isX = true;
+            }
+
+            console.log(areEyesClosed, isX, isY);
+            if (areEyesClosed){
+                eyes += 1;
+            }
+            if (isX){
+                countX += 1;
+            }
+            if (isY){
+                countY += 1;
+            }
+
+            if (areEyesClosed && isX && isY){
+                accumulate += 6;
+            }
+
+            console.log(eyes, countX, countY, accumulate);
+            
+
+            // Also, if center>2.5, flag = true.
+            // Use these values to detect if the 
         }
 
         (async () => {
