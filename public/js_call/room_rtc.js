@@ -52,7 +52,7 @@ let joinRoomInit = async () => {
 let joinStream = async () => {
   localTracks = await AgoraRTC.createMicrophoneAndCameraTracks()
   let player = `<div class="video__container" id="user-container-${uid}">
-                    <div class="video-player" id="user-${uid}"></div>
+                    <video class="video-player" id="user-${uid}"></video>
                  </div>`
 
   document.getElementById('streams__container').insertAdjacentHTML('beforeend', player)
@@ -64,7 +64,7 @@ let joinStream = async () => {
 let switchToCamera = async () => {
   console.log("------------------------------------------------------------------------------------------------------------------------------------")
   let player = `<div class="video__container" id="user-container-${uid}">
-                    <div class="video-player" id="user-${uid}"></div>
+                    <video class="video-player" id="user-${uid}"></video>
                  </div>`
   document.getElementById('streams__container').insertAdjacentHTML('beforeend', player)
   await localTracks[0].setMuted(true)
@@ -94,7 +94,7 @@ let handleUserPublished = async (user, mediaType) => {
   let player = document.getElementById(`user-container-${user.uid}`)
   if (player === null) {
     player = `<div class="video__container" id="user-container-${user.uid}">
-                <div class="video-player" id="user-${user.uid}"></div>
+                <video class="video-player" id="user-${user.uid}"></video>
             </div>`
 
     document.getElementById('streams__container').insertAdjacentHTML('beforeend', player)
@@ -161,7 +161,7 @@ let toggleScreen = async (e) => {
     displayFrame.style.display = 'block'
 
     let player = `<div class="video__container" id="user-container-${uid}">
-                <div class="video-player" id="user-${uid}"></div>
+                <video class="video-player" id="user-${uid}"></video>
             </div>`
 
     displayFrame.insertAdjacentHTML('beforeend', player)
@@ -229,16 +229,16 @@ let leaveStream = async (e) => {
     })
   })
   console.log("video frames:",videoFrames.length)
-  window.location.href = "lobby.html";
-  
-}
-
-let sendData=async(e)=>{
   console.log("sending data");
   var room=urlParams.get('room')
   var url="/viewdata/";
   url=url.concat(room);
   window.location=url;
+  
+}
+
+let sendData=async(e)=>{
+  
 }
 
 

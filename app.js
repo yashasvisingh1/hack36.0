@@ -14,6 +14,8 @@ const fs = require("fs");
 var room;
 const mongoose = require("mongoose");
 
+
+
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.use(bodyParser.json());
@@ -59,7 +61,7 @@ const otp = require("./routes/auth/otp");
 const storepatientdata=require("./routes/pages/storeemotions");
 const showpatientdata=require("./routes/pages/patientdata");
 const bot=require("./routes/pages/bot");
-
+const userdata=require("./src/models/userdata");
 //const google=require("./routes/auth/google")
 //use statements
 
@@ -114,16 +116,23 @@ app.get("/form", async function (req, res) {
 app.get("/secrets", async function (req, res) {
   //console.log(req);
   const user = await isAuth(req);
+  const email=user.email;
+  const data=await userdata.findOne({email:email});
   if (user) {
-    console.log(user);
-    res.render("front");
+    console.log(data);
+    res.render("front",{data:data});
   } else {
     res.send("not authenticated");
   }
 });
+
+
 app.get("/contact",function(req,res){
   res.render("contact");
 })
+
+
+
 app.post("/register", async function (req, res) {
   let password = req.body.password;
   let cpassword = req.body.confirmpassword;
@@ -225,9 +234,22 @@ app.get("/call/:roomid", async function (req, res) {
   res.sendFile(__dirname + "/lobby.html");
 });
 
-app.get("/bot",async function(req,res){
-  res.render()
-})
+
+
+// io.on("connection", function(socket) {
+//   console.log("socket connected");
+//   var room_name = socket.request.headers.referer; // link of page, where user connected to socket
+//   console.log(room_name);
+//   //connecting to room
+//   socket.join(room_name);
+//   socket.on('message', function(msg,id) {
+//     socket.to(id).emit('message', msg);
+//   });
+//   // socket.on("message", (msg) => {
+//   //   socket.broadcast.emit("message", msg, room);
+//   // })
+// });
+
 
 app.get("*", async (req, res) => {
   res.status(404).render("error/error.ejs");
