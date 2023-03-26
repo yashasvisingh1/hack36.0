@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Docapp</title>
+        <link rel="stylesheet" href="/css/blog/blog.css">
+        <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+        <link rel="stylesheet" 
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+      
+      </head>
+<body>
+    <div id="all_blogs" class="all-blogs">
+        <%if(docs.length==0){%>
+          <div class="no_data_div">
+            <div>
+              <img class="no_data" src="/images/nodata.avif">
+              <p>No doctors available!!</p>
+            </div>
+          </div>
+        <%}else{%>
+        <%docs.forEach(function(items){%>
+            <div class="card-container">
+                <main class="main-content">
+                  <form action="/call/<%=items.email%>" method="get">
+                      <h2><a href="#"><%=items.username%></a></h2>
+                      <h2><a href="#"><%=items.email%></a></h2>
+                      <button type="submit">Book</button>
+                    </form>
+                </main>
+              </div>
+        <%})%>
+        <%}%>
+        
+      </div>
+</body>
+</html>
