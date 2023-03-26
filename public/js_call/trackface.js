@@ -19,14 +19,14 @@ var frequency=new Map([
     ["Loaded",8],
     ["No Face",9],
 ])
-var calling = setInterval(store, 1000);
+var calling = setInterval(store, 30000);
 
 async function store(){
-    var value=data.innerHTML;
-    var idx=frequency.get(value);
-    array[idx]++;
-    // frequency.get(value)+=1;
-    sendpatientdata();
+    var value=await data.innerHTML;
+    var idx=await frequency.get(value);
+    array[idx%10]++;
+        // frequency.get(value)+=1;
+        sendpatientdata();
     console.log(array);
 }
 

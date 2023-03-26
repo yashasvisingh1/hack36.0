@@ -116,12 +116,12 @@ css<!DOCTYPE html>
 
   </main>
   <canvas id="output"></canvas>
-  <video id="webcam" playsinline style="
+  <!-- <video id="webcam" playsinline style="
     visibility: hidden;
     width: auto;
     height: auto;
   ">
-  </video>
+  </video> -->
   <h1 id="status">LOADING...</h1>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.4.0/dist/tf.min.js"></script>
@@ -151,6 +151,7 @@ new EmojiPicker({
 </script> -->
 
 <script>
+  
   function setText( text ) {
       document.getElementById( "status" ).innerText = text;
   }
@@ -162,6 +163,7 @@ new EmojiPicker({
       ctx.stroke();
   }
 
+  // setInterval(trackFace, 5000);
   // async function setupWebcam() {
   //     return new Promise( ( resolve, reject ) => {
   //         const webcamElement = document.getElementById( "webcam" );
@@ -188,10 +190,11 @@ new EmojiPicker({
 
   let output = null;
   let model = null;
-
+    setInterval(predictEmotion,10000);
   async function predictEmotion( points ) {
       let result = tf.tidy( () => {
           const xs = tf.stack( [ tf.tensor1d( points ) ] );
+          console.log("predicting: "+( xs ));
           return emotionModel.predict( xs );
       });
       let prediction = await result.data();
@@ -210,7 +213,7 @@ new EmojiPicker({
       });
       output.drawImage(
           video,
-          0, 0, video.width, video.height,
+          0, 0, video.width, video.height,  
           0, 0, video.width, video.height
       );
 
@@ -262,35 +265,39 @@ new EmojiPicker({
   (async () => {
       console.log("tracking face");
       // await setupWebcam();
-      const video = document.getElementById( "streams__container" );
-      // video.play();
+      const video = document.getElementById( "webcam" );
+      video.play();
       let videoWidth = video.videoWidth;
       let videoHeight = video.videoHeight;
       video.width = videoWidth;
       video.height = videoHeight;
 
       let canvas = document.getElementById( "output" );
-      // canvas.width = video.width;
-      // canvas.height = video.height;
+      canvas.width = video.width;
+      canvas.height = video.height;
       canvas.width = 0;
       canvas.height = 0;
       output = canvas.getContext( "2d" );
+      console.log(output);
       output.translate( canvas.width, 0 );
       output.scale( -1, 1 ); // Mirror cam
       output.fillStyle = "#fdffb6";
       output.strokeStyle = "#fdffb6";
       output.lineWidth = 2;
-
+      console.log(output);
       // Load Face Landmarks Detection
       model = await faceLandmarksDetection.load(
           faceLandmarksDetection.SupportedPackages.mediapipeFacemesh
       );
       // Load Emotion Detection
+      // model = await tf.loadLayersModel( '/js/web/model/facemo.json' );
       emotionModel = await tf.loadLayersModel( '/js/web/model/facemo.json' );
       // console.log(emotionModel);
       setText( "Loaded!" );
 
       trackFace();
-  })();
+  })
+  
+  ();
   </script>
 </html>

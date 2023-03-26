@@ -18,22 +18,22 @@ router.post("/sendpatientsdata/:roomid",async function(req,res){
     const email=user.email;
     // console.log(email);
     const result=await userdata.findOne({email:email});
-    // console.log(result.isdoctor);
+    console.log(result.isdoctor);
     if(result.isdoctor==false){
-        // console.log("not a doctor");
+        console.log("not a doctor");
         const result1=await patientdata.findOne({email:email,roomid:room});
-        // console.log("result1 "+result1);
-        if(result1==""){
-            // console.log("nt doctor");
+        console.log("result1 "+result1);
+        if(result1==null){
+            console.log("nt doctor");
             let patient=new patientdata({
                 email:email,
                 roomid:room,
                 emotions:data
             });
-            patient.save();
+            await patient.save();
         }
         else{
-            // console.log("updated patients data");
+            console.log("updated patients data");
             let result1=await patientdata.updateOne({email:email},{
                 $set:{
                     emotions:data
