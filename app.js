@@ -59,7 +59,7 @@ const verify=require("./routes/auth/verify");
 const otp = require("./routes/auth/otp");
 const storepatientdata=require("./routes/pages/storeemotions");
 const showpatientdata=require("./routes/pages/patientdata");
-
+const bot=require("./routes/pages/bot");
 
 //const google=require("./routes/auth/google")
 //use statements
@@ -74,7 +74,7 @@ app.use(Doc);
 app.use(verify);
 app.use(storepatientdata);
 app.use(showpatientdata);
-
+app.use(bot);
 
 //app.use(google);
 
@@ -230,6 +230,10 @@ app.get("/call/:roomid", async function (req, res) {
   room = req.params.roomId;
   res.sendFile(__dirname + "/lobby.html");
 });
+
+app.get("/bot",async function(req,res){
+  res.render()
+})
 
 app.get("*", async (req, res) => {
   res.status(404).render("error/error.ejs");

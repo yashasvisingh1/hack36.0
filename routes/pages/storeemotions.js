@@ -39,6 +39,7 @@ router.post("/sendpatientsdata/:roomid",async function(req,res){
                     emotions:data
                 }
             });
+            console.log("emotions storing: "+result1);
         }
         
     }
