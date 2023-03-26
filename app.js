@@ -55,13 +55,14 @@ const blog = require("./routes/pages/blog");
 const createblog = require("./routes/pages/createblog");
 const OtpData = require("./src/models/otpData");
 const form = require("./routes/auth/form");
-const focus = require("./routes/pages/focus");
+// const focus = require("./routes/pages/focus");
 const verify=require("./routes/auth/verify");
 const otp = require("./routes/auth/otp");
 const storepatientdata=require("./routes/pages/storeemotions");
 const showpatientdata=require("./routes/pages/patientdata");
 const bot=require("./routes/pages/bot");
 const userdata=require("./src/models/userdata");
+const focus=require("./routes/pages/focus");
 //const google=require("./routes/auth/google")
 //use statements
 
@@ -75,7 +76,7 @@ app.use(verify);
 app.use(storepatientdata);
 app.use(showpatientdata);
 app.use(bot);
-
+app.use(focus);
 //app.use(google);
 
 app.get("/", async (req, res) => {

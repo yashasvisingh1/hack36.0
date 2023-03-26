@@ -1,4 +1,5 @@
 var baseurl='/chat/bot';
+var baseurl1='/chat/bot1';
 // const socket=io();
 var url;
 var send=document.getElementById("socket-chat");
@@ -28,8 +29,16 @@ async function sendData (message){
         roomId : roomId
     })
 })
+receivedata();
+
 }
 
+async function receivedata(){
+    const res=await fetch(baseurl1,{
+        method:'GET',
+    })
+    console.log(res.json());
+}
 
 function sendmessage(msg){
   url=window.location.href;
