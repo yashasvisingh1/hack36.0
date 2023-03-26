@@ -63,7 +63,7 @@ const storepatientdata=require("./routes/pages/storeemotions");
 const showpatientdata=require("./routes/pages/patientdata");
 const bot=require("./routes/pages/bot");
 const userdata=require("./src/models/userdata");
-const focus=require("./routes/pages/focus");
+// const focus=require("./routes/pages/focus");
 //const google=require("./routes/auth/google")
 //use statements
 
