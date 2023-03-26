@@ -6,6 +6,7 @@ router.use(bodyparser.urlencoded({
     extended: true
 }));
 const isAuth = require("./isauth");
+const Doc=require("../../src/models/docdata");
 const UserData=require("../../src/models/userdata");
 
 
@@ -30,10 +31,13 @@ router.post("/form",async function(req,res){
     })
     await userData.save();
     if(req.body.code==="111"){
-      await UserData.findOneAndUpdate({email:email},{isdoctor:true});
+      const abc=await UserData.findOneAndUpdate({email:email},{isdoctor:true});
+      const a=new Doc({
+        username:user.username,
+        email:user.email
+      })
+      await a.save();
     }
-    // const data=await UserData.findOne({email:email});
-    // await data.keywords.push(req.body.category);
     console.log(userData);
     res.redirect("/secrets");
   }else{

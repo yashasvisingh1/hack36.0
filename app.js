@@ -53,6 +53,7 @@ const blog = require("./routes/pages/blog");
 const createblog = require("./routes/pages/createblog");
 const OtpData = require("./src/models/otpData");
 const form = require("./routes/auth/form");
+const Doc = require("./routes/auth/docapp");
 const focus = require("./routes/pages/focus");
 const verify=require("./routes/auth/verify");
 const otp = require("./routes/auth/otp");
@@ -69,6 +70,7 @@ app.use(createblog);
 app.use(form);
 app.use(focus);
 app.use(otp);
+app.use(Doc);
 app.use(verify);
 app.use(storepatientdata);
 app.use(showpatientdata);
@@ -116,7 +118,7 @@ app.get("/secrets", async function (req, res) {
   const user = await isAuth(req);
   if (user) {
     console.log(user);
-    res.render("front");
+    res.render("front",{user:user});
   } else {
     res.send("not authenticated");
   }
@@ -124,6 +126,7 @@ app.get("/secrets", async function (req, res) {
 app.get("/contact",function(req,res){
   res.render("contact");
 })
+
 app.post("/register", async function (req, res) {
   let password = req.body.password;
   let cpassword = req.body.confirmpassword;
@@ -214,7 +217,10 @@ app.post("/login", async function (req, res) {
     console.log("error");
   }
 });
-
+app.get("/chat",function(req,res){
+  const user=isAuth(req)
+  res.render("chat",{name:user.username});
+})
 app.get("/call/room.html", (req, res) => {
   console.log("video call called");
   res.sendFile(__dirname + "/room.html");
