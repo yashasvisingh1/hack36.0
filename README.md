@@ -2,7 +2,6 @@
 ![built-at-hack](https://user-images.githubusercontent.com/31176772/227753560-ccfeeda8-e0e1-487c-b4c4-1d8a7fac510b.jpg)
 
 
-## Team: Tourist_Ke_Bete
 ## Theme: Mental Health
 
 ## Problem: 
