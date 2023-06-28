@@ -12,6 +12,7 @@ let channel;
 const queryString = window.location.search
 const urlParams = new URLSearchParams(queryString)
 let roomId = urlParams.get('room')
+console.log("roomid "+roomId)
 
 if (!roomId) {
   roomId = 'main'
@@ -52,7 +53,7 @@ let joinRoomInit = async () => {
 let joinStream = async () => {
   localTracks = await AgoraRTC.createMicrophoneAndCameraTracks()
   let player = `<div class="video__container" id="user-container-${uid}">
-                    <video class="video-player" id="user-${uid}"></video>
+                    <div class="video-player" id="user-${uid}"></div>
                  </div>`
 
   document.getElementById('streams__container').insertAdjacentHTML('beforeend', player)
@@ -64,7 +65,7 @@ let joinStream = async () => {
 let switchToCamera = async () => {
   console.log("------------------------------------------------------------------------------------------------------------------------------------")
   let player = `<div class="video__container" id="user-container-${uid}">
-                    <video class="video-player" id="user-${uid}"></video>
+                    <div class="video-player" id="user-${uid}"></div>
                  </div>`
   document.getElementById('streams__container').insertAdjacentHTML('beforeend', player)
   await localTracks[0].setMuted(true)
@@ -94,7 +95,7 @@ let handleUserPublished = async (user, mediaType) => {
   let player = document.getElementById(`user-container-${user.uid}`)
   if (player === null) {
     player = `<div class="video__container" id="user-container-${user.uid}">
-                <video class="video-player" id="user-${user.uid}"></video>
+                <div class="video-player" id="user-${user.uid}"></div>
             </div>`
 
     document.getElementById('streams__container').insertAdjacentHTML('beforeend', player)
@@ -161,7 +162,7 @@ let toggleScreen = async (e) => {
     displayFrame.style.display = 'block'
 
     let player = `<div class="video__container" id="user-container-${uid}">
-                <video class="video-player" id="user-${uid}"></video>
+                <div class="video-player" id="user-${uid}"></div>
             </div>`
 
     displayFrame.insertAdjacentHTML('beforeend', player)
@@ -196,7 +197,7 @@ let toggleScreen = async (e) => {
 
 let leaveStream = async (e) => {
   e.preventDefault()
-  sendpatientdata();
+
   // document.getElementById('join-btn').style.display = 'block'
   // document.getElementsByClassName('stream__actions')[0].style.display = 'none'
 
@@ -229,39 +230,12 @@ let leaveStream = async (e) => {
     })
   })
   console.log("video frames:",videoFrames.length)
-  console.log("sending data");
-  var room=urlParams.get('room')
-  var url="/viewdata/";
-  url=url.concat(room);
-  window.location=url;
-  
-}
 
-let sendData=async(e)=>{
-  
+  window.location.href = "lobby.html";
 }
 
 
-var data=document.getElementById("status");
-var frequency=new Map([
-    ["happy",0],
-    ["sad",0],
-    ["angry",0],
-    ["disgust",0],
-    ["fear",0],
-    ["neutral",0],
-])
-var calling = setInterval(store, 5000);
-function store(){
-    var value=data.innerHTML;
-    frequency.set(value, frequency.get(value) + 1 || 1);
-    // frequency.get(value)+=1;
-    // console.log(frequency);
-}
 
-async function sendpatientdata(){
-    console.log("sending patients data!!!");
-}
 
 
 
@@ -271,5 +245,4 @@ document.getElementById('camera-btn').addEventListener('click', toggleCamera)
 document.getElementById('mic-btn').addEventListener('click', toggleMic)
 document.getElementById('screen-btn').addEventListener('click', toggleScreen)
 document.getElementById('leave-btn').addEventListener('click', leaveStream)
-document.getElementById('senddata-btn').addEventListener('click', sendData)
 joinRoomInit()

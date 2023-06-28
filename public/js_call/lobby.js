@@ -8,8 +8,8 @@ form.addEventListener('submit', (e) => {
   e.preventDefault()
 
   sessionStorage.setItem('display_name', e.target.name.value)
-
-  let inviteCode = e.target.room.value
+  var inviteCode=window.location.href;
+  inviteCode=inviteCode.slice(27);
   if (!inviteCode) {
     inviteCode = String(Math.floor(Math.random() * 10000))
   }

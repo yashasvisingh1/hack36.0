@@ -56,14 +56,14 @@ const createblog = require("./routes/pages/createblog");
 const OtpData = require("./src/models/otpData");
 const form = require("./routes/auth/form");
 const Doc = require("./routes/auth/docapp");
-const focus = require("./routes/pages/focus");
+//const focus = require("./routes/pages/focus");
 const verify=require("./routes/auth/verify");
 const otp = require("./routes/auth/otp");
-const storepatientdata=require("./routes/pages/storeemotions");
+// const storepatientdata=require("./routes/pages/storeemotions");
 const showpatientdata=require("./routes/pages/patientdata");
-const bot=require("./routes/pages/bot");
+// const bot=require("./routes/pages/bot");
 const userdata=require("./src/models/userdata");
-const focus=require("./routes/pages/focus");
+// const focus=require("./routes/pages/focus");
 //const google=require("./routes/auth/google")
 //use statements
 
@@ -71,14 +71,14 @@ const focus=require("./routes/pages/focus");
 app.use(blog);
 app.use(createblog);
 app.use(form);
-app.use(focus);
+//app.use(focus);
 app.use(otp);
 app.use(Doc);
 app.use(verify);
-app.use(storepatientdata);
+// app.use(storepatientdata);
 app.use(showpatientdata);
-app.use(bot);
-app.use(focus);
+// app.use(bot);
+// app.use(focus);
 //app.use(google);
 
 app.get("/", async (req, res) => {
@@ -234,7 +234,7 @@ app.get("/call/room.html", (req, res) => {
 });
 
 app.get("/call/:roomid", async function (req, res) {
-  room = req.params.roomId;
+  room = req.params.roomid;
   res.sendFile(__dirname + "/lobby.html");
 });
 
